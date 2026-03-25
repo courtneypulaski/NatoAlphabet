@@ -31,12 +31,9 @@ def main():
     while True:
         gamemode = input("Select a game mode - learn or guess, or quit: ").lower()
         if gamemode == "learn":
-            print("This is learn mode")
-            # If learnMode returns True it means the user asked to quit the program
             if learnMode():
                 break
         elif gamemode == "guess":
-            print("This is guess mode")
             if guessMode():
                 break
         elif gamemode == "quit":
@@ -49,7 +46,6 @@ def learnMode():
         currentLetter = input("Enter a letter, RETURN to the main menu, or QUIT: ").lower()
         if currentLetter == "quit":
             print("Goodbye")
-            # Return True to signal main() that it should exit its loop
             return True
         elif currentLetter == "return":
             print("Goodbye")
@@ -68,9 +64,16 @@ def learnMode():
             print(answer)
 
 def guessMode():
+    i = 25
     while True:
-        number = random.randint(0,25)
-        answer = natoAlphabet[number]
+        if i == 25:
+            random.shuffle(natoAlphabet)
+            i = 0   
+        else:
+            i += 1     
+        print(natoAlphabet)
+        print(i)
+        answer = natoAlphabet[i]
         print(f"What is the corresponding code for the letter {answer[0].upper()}? ")
         guess = input("Type a word, or Return to main menu or Quit: ")
         if guess == answer:
